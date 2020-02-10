@@ -1,140 +1,133 @@
 package gradle_jdbc_study.dto;
 
+import java.util.Arrays;
+import java.util.Date;
+
 import javax.print.DocFlavor.BYTE_ARRAY;
 
 public class Employee {
 	private int empNo;
 	private String empName;
-	private int title;
-	private int manager;
+	private Title title;
+	private Employee manager;
 	private int salary;
 	private Department dept;
-	private BYTE_ARRAY pic = null;
-	private String pass;
-	
+	private String passwd;
+	private Date hireDate;
+	private byte[] pic;
+
 	public Employee() {
+		super();
 	}
-	
 
 	public Employee(int empNo) {
 		this.empNo = empNo;
 	}
 
-
-	public Employee(Department dept) {
-		this.dept = dept;
-	}
-
-
-	public Employee(int empNo, String empName, int title, int manager, int salary, Department dept, BYTE_ARRAY pic,
-			String pass) {
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
+			String passwd, Date hireDate, byte[] pic) {
 		this.empNo = empNo;
 		this.empName = empName;
 		this.title = title;
 		this.manager = manager;
 		this.salary = salary;
 		this.dept = dept;
+		this.passwd = passwd;
+		this.hireDate = hireDate;
 		this.pic = pic;
-		this.pass = pass;
 	}
 
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
+			String passwd, Date hireDate) {
+		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.manager = manager;
+		this.salary = salary;
+		this.dept = dept;
+		this.passwd = passwd;
+		this.hireDate = hireDate;
+	}
 
 	public int getEmpNo() {
 		return empNo;
 	}
 
-
 	public void setEmpNo(int empNo) {
 		this.empNo = empNo;
 	}
-
 
 	public String getEmpName() {
 		return empName;
 	}
 
-
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
 
-
-	public int getTitle() {
+	public Title getTitle() {
 		return title;
 	}
 
-
-	public void setTitle(int title) {
+	public void setTitle(Title title) {
 		this.title = title;
 	}
 
-
-	public int getManager() {
+	public Employee getManager() {
 		return manager;
 	}
 
-
-	public void setManager(int manager) {
+	public void setManager(Employee manager) {
 		this.manager = manager;
 	}
-
 
 	public int getSalary() {
 		return salary;
 	}
 
-
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-
 
 	public Department getDept() {
 		return dept;
 	}
 
-
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
 
+	public String getPasswd() {
+		return passwd;
+	}
 
-	public BYTE_ARRAY getPic() {
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
+	public Date getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	public byte[] getPic() {
 		return pic;
 	}
 
-
-	public void setPic(BYTE_ARRAY pic) {
+	public void setPic(byte[] pic) {
 		this.pic = pic;
 	}
-
-
-	public String getPass() {
-		return pass;
-	}
-
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Employee [empNo=" + empNo + ", empName=" + empName + ", title=" + title + ", manager=" + manager
-				+ ", salary=" + salary + ", dept=" + dept + ", pic=" + pic + ", pass=" + pass + "]";
-	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dept == null) ? 0 : dept.hashCode());
 		result = prime * result + empNo;
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -145,19 +138,26 @@ public class Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (dept == null) {
-			if (other.dept != null)
-				return false;
-		} else if (!dept.equals(other.dept))
-			return false;
 		if (empNo != other.empNo)
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return String.format(
+				"[%s, %s, %s, %s, %s, %s, %s, %s, %s]",
+				empNo,
+				empName,
+				title.getTitleNo(),
+				manager.getEmpNo(),
+				salary,
+				dept.getDeptNo(),
+				passwd,
+				String.format("%1$tF %1$tT", hireDate),
+				pic!=null?pic.length:null);
+		
+
+	}
+
 }
