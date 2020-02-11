@@ -27,3 +27,17 @@ select *
 from employee;
 select*
 from department;
+
+select emp_no, emp_name, title, manager, salary, dept, hire_date pic from employee where emp_no=1003;
+
+-- 조민희가 로그인하려고 하는 경우
+select emp_no, emp_name, title, manager, salary, dept,hire_date
+from employee 
+where emp_no = 1003 and passwd = password('1234567');
+
+
+select emp_no, emp_name, title, manager, salary, dept, pic, passwd, hire_date
+from employee;
+
+
+insert into employee(emp_no, emp_name, title, manager, salary, dept, passwd, hire_date) values (1004, '이유영', 2, 1003, 2000000, 2, 'rootroot','2000-03-01');

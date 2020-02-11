@@ -14,10 +14,8 @@ import gradle_jdbc_study.util.LogUtil;
 
 public class TitleDaoImpl implements TitleDao {
 	private static final TitleDaoImpl instance = new TitleDaoImpl();
-
 	private TitleDaoImpl() {
 	};
-
 	public static TitleDaoImpl getInstance() {
 		return instance;
 	}

@@ -1,7 +1,5 @@
 package gradle_jdbc_study.dao;
 
-import static org.junit.Assert.fail;
-
 import java.sql.SQLException;
 import java.util.List;
 
