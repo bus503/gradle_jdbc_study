@@ -10,6 +10,4 @@ public class LoginService {
 	public Employee login(Employee emp) {
 		return dao.loginEmployee(emp);
 	}
-
-	}
-
+}

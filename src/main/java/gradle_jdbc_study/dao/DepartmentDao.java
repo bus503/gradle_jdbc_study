@@ -6,11 +6,10 @@ import java.util.List;
 import gradle_jdbc_study.dto.Department;
 
 public interface DepartmentDao {
-	Department selectDepartmentByNo(Department department);
+	Department selectDepartmentByNo(Department dept);
+	List<Department> selectDepartmentByAll();
 	
-	List<Department> selectDepartmentByAll() throws SQLException;
-	
-	int insertDepartment(Department department);
-	int deleteDepartment(Department department);
-	int updateDepartment(Department department);
+	int insertDepartment(Department dept);
+	int updateDepartment(Department dept);
+	int deleteDepartment(Department dept);
 }

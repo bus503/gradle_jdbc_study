@@ -1,4 +1,5 @@
 package gradle_jdbc_study.ui;
+
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,11 @@ public class MainFrame extends JFrame implements ActionListener {
 	private LoginFrame loginFrame;
 	private JButton btnLogOut;
 	private JLabel lblLoginName;
+	private JPanel pTop;
+	private JPanel panel;
+	private JButton btnTitle;
+	private JButton btnDepartment;
+	private JButton btnEmployee;
 	
 	public MainFrame() {
 		initialize();
@@ -25,22 +31,42 @@ public class MainFrame extends JFrame implements ActionListener {
 	
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 192);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		pTop = new JPanel();
+		contentPane.add(pTop);
+		
 		lblLoginName = new JLabel("New label");
 		lblLoginName.setFont(new Font("굴림", Font.BOLD, 40));
 		lblLoginName.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblLoginName);
+		pTop.add(lblLoginName);
 		
 		btnLogOut = new JButton("로그아웃");
 		btnLogOut.addActionListener(this);
-		contentPane.add(btnLogOut);
+		pTop.add(btnLogOut);
 		
 		loginNameRefresh();
+		
+		
+		panel = new JPanel();
+		contentPane.add(panel);
+		panel.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		btnTitle = new JButton("직책 정보");
+		btnTitle.addActionListener(this);
+		panel.add(btnTitle);
+		
+		btnDepartment = new JButton("부서 정보");
+		btnDepartment.addActionListener(this);
+		panel.add(btnDepartment);
+		
+		btnEmployee = new JButton("사원 정보");
+		btnEmployee.addActionListener(this);
+		panel.add(btnEmployee);
 	}
 
 	public void loginNameRefresh() {
@@ -52,14 +78,35 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEmployee) {
+			btnEmployeeActionPerformed(e);
+		}
+		if (e.getSource() == btnDepartment) {
+			btnDepartmentActionPerformed(e);
+		}
+		if (e.getSource() == btnTitle) {
+			btnTitleActionPerformed(e);
+		}
 		if (e.getSource() == btnLogOut) {
 			btnLogOutActionPerformed(e);
 		}
 	}
+	
 	protected void btnLogOutActionPerformed(ActionEvent e) {
 		LoginFrame.loingEmp = null;
 		dispose();
 		loginFrame.setVisible(true);
 		loginFrame.clearTf();
+	}
+	protected void btnTitleActionPerformed(ActionEvent e) {
+	}
+	protected void btnDepartmentActionPerformed(ActionEvent e) {
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 450, 400);
+		DepartmentUIPanel tp = new DepartmentUIPanel();
+		frame.add(tp);
+		frame.setVisible(true);
+	}
+	protected void btnEmployeeActionPerformed(ActionEvent e) {
 	}
 }

@@ -25,8 +25,12 @@ from title;
 
 select *
 from employee;
+
 select*
 from department;
+
+
+
 
 select emp_no, emp_name, title, manager, salary, dept, hire_date pic from employee where emp_no=1003;
 

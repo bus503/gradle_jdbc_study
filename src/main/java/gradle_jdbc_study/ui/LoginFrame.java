@@ -37,14 +37,16 @@ public class LoginFrame extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {// select Look and Feel
-					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+				try {
+					// select Look and Feel
+//					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					
 //					UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 //					UIManager.setLookAndFeel("com.jtattoo.plaf.aero.AeroLookAndFeel");
 //					UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
 //					UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-	
+					
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -62,7 +64,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 651, 448);
+		setBounds(100, 100, 337, 181);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,6 +80,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pContent.add(lblNo);
 		
 		tfNo = new JTextField();
+		tfNo.setText("1003");
 		pContent.add(tfNo);
 		tfNo.setColumns(10);
 		
@@ -85,7 +88,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		lblPasswd.setHorizontalAlignment(SwingConstants.RIGHT);
 		pContent.add(lblPasswd);
 		
-		pfPasswd = new JPasswordField();
+		pfPasswd = new JPasswordField("1234567");
 		pContent.add(pfPasswd);
 		
 		JPanel pBtns = new JPanel();
@@ -114,16 +117,16 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		loingEmp = service.login(new Employee(empNo, passwd));
 		if (loingEmp == null) {
-			JOptionPane.showMessageDialog(null, "사원번호 혹은 비밀번호가 틀림");
+			JOptionPane.showMessageDialog(null, "사원번호나 비밀번호를 확인해주세요.");
 			return;
 		}
-		JOptionPane.showMessageDialog(null, loingEmp.getEmpName() + " 님 반갑습니다");
+		JOptionPane.showMessageDialog(null, loingEmp.getEmpName() + " 님 반갑습니다.");
 		
 		if (main == null) {
 			main = new MainFrame();
 			main.setLoginFrame(this);
 		}
-
+		
 		dispose();
 		main.loginNameRefresh();
 		main.setVisible(true);

@@ -13,21 +13,26 @@ public class Employee {
 	private Date hireDate;
 	private byte[] pic;
 	
-	
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+	public Employee(int empNo) {
+		this.empNo = empNo;
+	}
 	
 	public Employee(int empNo, String passwd) {
 		this.empNo = empNo;
 		this.passwd = passwd;
 	}
 	
-	public Employee() {
-		
-	}
-	
-	public Employee(int empNo) {
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept) {
 		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.manager = manager;
+		this.salary = salary;
+		this.dept = dept;
 	}
-	
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
 			Date hireDate) {
 		this.empNo = empNo;

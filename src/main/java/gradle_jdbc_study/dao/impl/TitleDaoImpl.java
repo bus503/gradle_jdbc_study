@@ -40,7 +40,7 @@ public class TitleDaoImpl implements TitleDao {
 	}
 
 	@Override
-	public List<Title> selectTitleByAll() throws SQLException {
+	public List<Title> selectTitleByAll() {
 		String sql = "select title_no, title_name from title";
 
 		try (Connection con = MysqlDataSource.getConnection();
@@ -78,10 +78,8 @@ public class TitleDaoImpl implements TitleDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 			return res;
 		}
-		
 
 	@Override
 	public int deleteTitle(Title title) {
@@ -112,5 +110,4 @@ public class TitleDaoImpl implements TitleDao {
 		}
 		return res;
 	}
-
 }
