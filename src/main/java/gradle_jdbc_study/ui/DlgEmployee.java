@@ -16,7 +16,6 @@ import gradle_jdbc_study.ui.list.EmployeeTblPanel;
 
 @SuppressWarnings("serial")
 public class DlgEmployee extends JDialog implements ActionListener {
-
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
 	private EmployeeTblPanel pEmployee;

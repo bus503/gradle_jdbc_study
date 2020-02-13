@@ -25,6 +25,18 @@ public class Employee {
 		this.passwd = passwd;
 	}
 	
+	
+	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept,
+			Date hireDate, byte[] pic) {
+		this.empNo = empNo;
+		this.empName = empName;
+		this.title = title;
+		this.manager = manager;
+		this.salary = salary;
+		this.dept = dept;
+		this.hireDate = hireDate;
+		this.pic = pic;
+	}
 	public Employee(int empNo, String empName, Title title, Employee manager, int salary, Department dept) {
 		this.empNo = empNo;
 		this.empName = empName;
@@ -142,6 +154,20 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
+		return String.format("%s(%d) - %s", empName,  empNo, title.getTitleName());
+//		return String.format(
+//				"[%s %s %s %s %s %s %s %s %s]",
+//				empNo, 
+//				empName, 
+//				title.getTitleNo(), 
+//				manager.getEmpNo(), 
+//				salary, 
+//				dept.getDeptNo(), 
+//				passwd==null?"****":passwd, 
+//				String.format("%1$tF %1$tT", hireDate), 
+//				pic != null?pic.length:null);
+	}
+	public String toDebug() {
 		return String.format(
 				"[%s %s %s %s %s %s %s %s %s]",
 				empNo, 
@@ -154,5 +180,6 @@ public class Employee {
 				String.format("%1$tF %1$tT", hireDate), 
 				pic != null?pic.length:null);
 	}
+	
 
 }

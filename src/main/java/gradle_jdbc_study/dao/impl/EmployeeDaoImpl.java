@@ -207,4 +207,55 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return new Employee(empNo, empName, title, manager, salary, dept);
 	}
 
+	@Override
+	public List<Employee> selectEmployeeGroupByTno(Title titleNo) {
+		String sql = "select e.emp_no, e.emp_name , e.title , t.title_name, m.emp_name as manager_name , m.emp_no as manager_no , e.salary , e.dept , d.dept_name " + 
+			     "  from employee e left join employee m on e.manager = m.emp_no join department d on e.dept = d.dept_no join title t on e.title = t.title_no " + 
+			     " where e.title =?";
+		List<Employee> list = new ArrayList<>();
+		try(Connection con = MysqlDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setInt(1, titleNo.getTitleNo());
+			LogUtil.prnLog(pstmt);
+			try(ResultSet rs = pstmt.executeQuery()){
+				while(rs.next()) {
+					list.add(getEmployeeFull(rs));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Employee> selectEmployeejoin() {
+		String sql = "select e.emp_no, e.emp_name , e.title , t.title_name, m.emp_name as manager_name , m.emp_no as manager_no , e.salary , e.dept , d.dept_name, e.hire_date, e.pic" + 
+			     " from employee e left join employee m on e.manager = m.emp_no join department d on e.dept = d.dept_no join title t on e.title = t.title_no";
+		List<Employee> list = new ArrayList<>();
+		try(Connection con = MysqlDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			while(rs.next()) {
+				list.add(getEmployeeFullJoin(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	private Employee getEmployeeFullJoin(ResultSet rs) throws SQLException {
+		int empNo = rs.getInt("e.emp_no");
+		String empName = rs.getString("e.emp_name");
+		Title title = new Title(rs.getInt("e.title"), rs.getString("t.title_name"));
+		Employee manager = rs.getInt("manager_no")!=0?new Employee(rs.getInt("manager_no")):new Employee();
+		manager.setEmpName(rs.getString("manager_name")!=null?rs.getString("manager_name"):"직속 상사 없음");
+		int salary = rs.getInt("e.salary");
+		Department dept = new Department();
+		dept.setDeptNo(rs.getInt("e.dept"));
+		dept.setDeptName(rs.getString("d.dept_name"));
+		Date hireDate = rs.getTimestamp("e.hire_date");
+		byte[] pic = rs.getBytes("e.pic");
+		return new Employee(empNo, empName, title, manager, salary, dept, hireDate, pic);
+	}
 }

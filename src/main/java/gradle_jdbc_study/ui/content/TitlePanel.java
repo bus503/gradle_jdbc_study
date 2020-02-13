@@ -5,8 +5,10 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import gradle_jdbc_study.dto.Title;
+import gradle_jdbc_study.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
 public class TitlePanel extends AbsItemPanel<Title> {
@@ -18,7 +20,8 @@ public class TitlePanel extends AbsItemPanel<Title> {
 	}
 	
 	private void initialize() {
-		setLayout(new GridLayout(0, 2, 10, 10));
+		setBorder(new TitledBorder(null, "\uC9C1\uCC45 \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setLayout(new GridLayout(0, 2, 20, 10));
 		
 		JLabel lblNo = new JLabel("번호");
 		lblNo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -39,6 +42,7 @@ public class TitlePanel extends AbsItemPanel<Title> {
 
 	@Override
 	public Title getItem() {
+		validCheck();
 		int titleNo = Integer.parseInt(tfNo.getText().trim());
 		String titleName = tfName.getText().trim();
 		return new Title(titleNo, titleName);
@@ -54,6 +58,14 @@ public class TitlePanel extends AbsItemPanel<Title> {
 	public void clearTf() {
 		tfNo.setText("");
 		tfName.setText("");
+	}
+
+	@Override
+	public void validCheck() {
+		if(tfNo.getText().equals("") || tfName.getText().contentEquals("")) {
+			throw new InvalidCheckException();
+		}
+		
 	}
 
 }

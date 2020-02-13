@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import gradle_jdbc_study.dto.Title;
+import gradle_jdbc_study.ui.service.TitleUiService;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -99,6 +103,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		loginFrame.clearTf();
 	}
 	protected void btnTitleActionPerformed(ActionEvent e) {
+		JFrame frame = new JFrame();
+		frame.setBounds(100,100,450,400);
+		TitleUiService service = new TitleUiService();
+		List<Title> list = service.showTitleList();
+		TitleUIPanel tp = new TitleUIPanel();
+		frame.add(tp);
+		frame.setVisible(true);
+		
 	}
 	protected void btnDepartmentActionPerformed(ActionEvent e) {
 		JFrame frame = new JFrame();
@@ -107,6 +119,33 @@ public class MainFrame extends JFrame implements ActionListener {
 		frame.add(tp);
 		frame.setVisible(true);
 	}
+	
 	protected void btnEmployeeActionPerformed(ActionEvent e) {
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 450, 400);
+		EmployeeUIPanel tp = new EmployeeUIPanel();
+		frame.add(tp);
+		frame.setVisible(true);
 	}
-}
+}	
+//		JFrame frame = new JFrame();
+//		frame.setBounds(100, 100, 450, 400);
+//		EmployeeUiService service = new EmployeeUiService();
+//		List<Department> list = service.showDeptList();
+//		EmployeePanel tp = new EmployeePanel();
+//		tp.setCmbDeptList(list);
+//		tp.getCmbDept().addItemListener(new ItemListener() {
+//			
+//			@Override
+//			public void itemStateChanged(ItemEvent e) {
+//				if(e.getStateChange() == ItemEvent.SELECTED) {
+//					JOptionPane.showMessageDialog(null, e.getItem());
+//					tp.setCmbManagerList(service.showManagerList((Department)e.getItem()));
+//				}
+//			}
+//		});
+//		tp.setCmbTitleList(service.showTitleList());
+//		frame.add(tp);
+//		frame.setVisible(true);
+//	}
+
